@@ -1,4 +1,26 @@
+import { useCallback, useState } from "react";
+
 function Home() {
+    const {keyWord, searchResult, setSearchResult} = useHomeContext();
+    const [currentPage, setCurrentPage] = useState();
+    const [searchIsLoading, setSearchIsLoading] = useState();
+
+    const fetchInitialSearchResults = useCallback(async=()=> {
+        setCurrentPage(1);
+        if (keyWord === ""){
+            if (searchResult.length === 0){
+                return;
+            }
+            setSearchResult([]);
+            return;
+        }
+
+        setSearchIsLoading(true);
+
+        try {
+            const response = await.axios.get();
+        }
+    })
     return (
         <Grid container className="main-container" direction={"column"}>
             <Grid className="header-container" item lg={1} style={{maxHeight: "10vh"}}>
