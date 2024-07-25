@@ -1,7 +1,41 @@
 import { TextField, Typography, Grid, Button, Chip } from "@mui/material";
 import FaceIcon from "@mui/icons-material/Face";
+import { LOGIN_LOCAL_STORAGE_KEY, USERNAME_LOCAL_STORAGE_KEY } from "../../const/consts";
+import { useDashboardContext } from "../../context/DashboardContext";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+    const localStorageUsername = JSON.parse(localStorage.getItem(USERNAME_LOCAL_STORAGE_KEY));
+
+    const {isLoggedIn, setIsLoggedIn, handleSetKeyword, setKeyword, setNews, setSearchResult } = useDashboardContext();
+    const [searchTerm, setSearchTerm] = useState("");
+    const [username, setUsername] = useState(localStorageUsername);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isLoggedIn){
+            navigate("/");
+        }
+    }, [isLoggedIn, navigate]);
+
+    function handleKeyPress(e) {
+        if(e.key === "Enter"){
+            handleSetKeyword(searchTerm);
+        }
+    }
+
+    function handleLogout() {
+        setIsLoggedIn(false);
+        setUsername("");
+        setSearchResult([]);
+        setKeyword("");
+        setNews("");
+
+        localStorage.removeItem(USERNAME_LOCAL_STORAGE_KEY);
+        localStorage.removeItem(LOGIN_LOCAL_STORAGE_KEY);
+    }
+
     return (
         <Grid container alignItems="center" justifyContent={{xs: "space-around"}} height="10vh" width="100%">
             <Grid item xs={2} sm={2} md={2} justifySelf="flex-start" width="100%">
@@ -26,12 +60,16 @@ function Header() {
                             placeholder="What news you are looking for?" 
                             size="small" 
                             color="primary"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyDown={handleKeyPress}
                         ></TextField>
                     </Grid>
 
                     <Grid item xs={4} md={2}>
                         <Button
                             variant="contained"
+                            onClick={() => handleSetKeyword(searchTerm)}
                         >Search</Button>
                     </Grid>
                 </Grid>
@@ -41,7 +79,7 @@ function Header() {
                 <Grid 
                     container 
                     gap={1} 
-                    justifyContainer={{xs: "center", md: "flex-end"}} 
+                    justifyContent={{xs: "center", md: "flex-end"}} 
                     alignItems="center" 
                     width="100%"
                 >
@@ -51,7 +89,7 @@ function Header() {
                     </Grid>
 
                     <Grid item marginRight={2}>
-                        <Button variant="contained">
+                        <Button variant="contained" onClick={handleLogout}>
                             Logout
                         </Button>
                     </Grid>

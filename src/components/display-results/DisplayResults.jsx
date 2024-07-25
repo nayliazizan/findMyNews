@@ -1,8 +1,11 @@
-import { Typography, Grid, Button, LinearProgress } from "@mui/material";
+import { Typography, Grid, Button, LinearProgress, Box } from "@mui/material";
 import NewsItem from "../NewsItem/NewsItem";
+import { useDashboardContext } from "../../context/DashboardContext";
+import PropTypes from "prop-types";
+
 
 function DisplayResults({handleLoadMore, searchIsLoading}) {
-    const {keyword, news} = useHomeContext();
+    const {keyword, news} = useDashboardContext();
     const title = keyword;
     return (
         <Grid>
@@ -47,5 +50,10 @@ function DisplayResults({handleLoadMore, searchIsLoading}) {
         
     );
 }
+
+DisplayResults.propTypes = {
+    handleLoadMore: PropTypes.func.isRequired,
+    searchIsLoading: PropTypes.bool.isRequired
+};
 
 export default DisplayResults;

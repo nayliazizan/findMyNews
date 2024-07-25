@@ -7,16 +7,13 @@ import bckgd from './components/images/wbb1.jpg';
 
 function App() {
   return (
-    /*
     <Router>
       <Routes>
         <Route path='/' element={<Login/>} />
         <Route path='/home' element={<Home/>} />
       </Routes>
     </Router>
-    */
 
-    <Home/>
   );
 }
 

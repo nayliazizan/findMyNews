@@ -1,18 +1,24 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import Header from "../Header/Header";
 import MyFavouritesPanel from "../MyFavouritesPanel/MyFavouritesPanel";
 import DisplayResults from "../display-results/DisplayResults";
+import { useDashboardContext } from "../../context/DashboardContext";
+import axios from "axios";
+
+const API_KEY = import.meta.env.VITE_API_KEY;
+const PAGE_SIZE = import.meta.env.VITE__PAGE_SIZE;
+const PAGE_NO = import.meta.env.VITE_PAGE_NO;
+const DEVENV = import.meta.env.DEV;
 
 function Home() {
-    /*
-    const {keyWord, searchResult, setSearchResult} = useHomeContext();
-    const [currentPage, setCurrentPage] = useState();
-    const [searchIsLoading, setSearchIsLoading] = useState();
+    const {keyword, searchResult, setSearchResult} = useDashboardContext();
+    const [currentPage, setCurrentPage] = useState(Number(PAGE_NO));
+    const [searchIsLoading, setSearchIsLoading] = useState(false);
 
-    const fetchInitialSearchResults = useCallback(async=()=> {
+    const fetchInitialSearchResults = useCallback(async()=> {
         setCurrentPage(1);
-        if (keyWord === ""){
+        if (keyword === ""){
             if (searchResult.length === 0){
                 return;
             }
@@ -23,10 +29,64 @@ function Home() {
         setSearchIsLoading(true);
 
         try {
-            const response = await.axios.get();
+            const response = await axios.get(`https://newsapi.org/v2/everything?apiKey=${API_KEY}&sortBy=publishedAt&q=${keyword}&searchIn=title&pageSize=${PAGE_SIZE}&page=${PAGE_NO}&language=en`);
+            const data = response.data;
+            const articles = data.articles;
+
+            if(data.totalResults === 0) {
+                setSearchResult([]);
+            } else {
+                setSearchResult(articles);
+            }
+        } catch (error) {
+            if (DEVENV === "false") {
+                alert("Requests from browser arent allowed, except from localhost");
+            }
+            alert(error);
         }
-    })
-    */
+        setSearchIsLoading(false);
+    }, [keyword]);
+
+    useEffect(() => {
+        fetchInitialSearchResults();
+    }, [fetchInitialSearchResults]);
+
+    function handleLoadMore(){
+        setCurrentPage((prev) => prev + 1);
+    }
+
+    const fetchNextPage = useCallback(async() => {
+        if(currentPage === 1){
+            return;
+        }
+
+        setSearchIsLoading(true);
+
+        try {
+            const response = await axios.get(`https://newsapi.org/v2/everything?apiKey=${API_KEY}&sortBy=publishedAt&q=${keyword}&searchIn=title&pageSize=${PAGE_SIZE}&page=${PAGE_NO}&language=en`);
+            const data = response.data;
+            const articles = data.articles;
+    
+            if(data.totalResults > 0) {
+                setSearchResult((prevSearchResult)=> [
+                    ...prevSearchResult,
+                    ...articles
+                ]);
+            }
+        } catch (error) {
+            if(DEVENV === "false") {
+                alert("Request from browser arent allowed except localhost")
+            }
+            alert(error);
+        }
+
+        setSearchIsLoading(false);
+    }, [currentPage]);
+
+    useEffect(() => {
+        fetchNextPage();
+    }, [fetchNextPage]);
+
     return (
         <Grid container className="main-container" direction={"column"}>
             <Grid className="header-container" item lg={1} style={{maxHeight: "10vh"}} borderBottom={2}>
@@ -47,7 +107,7 @@ function Home() {
                     </Grid>
 
                     <Grid className="result-container" item height="90vh" lg="9.5" md={9} sm={8} xs={12} p={2}>
-                        <DisplayResults /* keyWord={keyWord} updateMyFavourites={updateMyFavourites} */></DisplayResults>
+                        <DisplayResults /* keyword={keyword} */handleLoadMore={handleLoadMore} searchIsLoading={searchIsLoading}></DisplayResults>
                     </Grid>
                 </Grid>
             </Grid>
