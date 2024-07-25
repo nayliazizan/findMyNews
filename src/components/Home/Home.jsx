@@ -7,7 +7,7 @@ import { useDashboardContext } from "../../context/DashboardContext";
 import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-const PAGE_SIZE = import.meta.env.VITE__PAGE_SIZE;
+const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 const PAGE_NO = import.meta.env.VITE_PAGE_NO;
 const DEVENV = import.meta.env.DEV;
 
@@ -45,6 +45,7 @@ function Home() {
             alert(error);
         }
         setSearchIsLoading(false);
+        // eslint-disable-next-line
     }, [keyword]);
 
     useEffect(() => {
@@ -81,6 +82,7 @@ function Home() {
         }
 
         setSearchIsLoading(false);
+        // eslint-disable-next-line
     }, [currentPage]);
 
     useEffect(() => {

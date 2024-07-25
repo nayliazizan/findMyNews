@@ -3,18 +3,56 @@ import { useEffect, useState } from "react";
 import loginInfo from "../../data/loginInfo";
 import { useNavigate } from "react-router-dom";
 import PasswordField from "../custom-components/PasswordField";
+import ErrorSnackbar from "../custom-components/ErrorSnackbar";
+import { useDashboardContext } from "../../context/DashboardContext";
+import { LOGIN_LOCAL_STORAGE_KEY, USERNAME_LOCAL_STORAGE_KEY } from "../../const/consts";
+
 
 function Login() {
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState();
-    const [isLoggedIn, setIsLoggedIn] = useState();
-    const [isLoggedInProgress, setIsLoggedInProgress] = useState();
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState(false);
+    const {isLoggedIn, setIsLoggedIn} = useDashboardContext();
+    const [isLoggedInProgress, setIsLoggedInProgress] = useState(false);
     const navigate = useNavigate();
 
     useEffect (() => {
+        if(isLoggedIn){
+            navigate("/home");
+        }
+    }, [isLoggedIn, navigate]);
 
-    });
+    function handleUsernameChange(e){
+        setErrorMessage(false);
+        setUserName(e.target.value);
+    }
+
+    function handlePasswordChange(e){
+        setErrorMessage(false);
+        setPassword(e.target.value);
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        setIsLoggedInProgress(true);
+
+        setTimeout(() => {
+            const user = loginInfo.find(
+                (user) => user.username === userName && user.password === password
+            );
+
+            if(user){
+                setIsLoggedIn(true);
+                localStorage.setItem(LOGIN_LOCAL_STORAGE_KEY, JSON.stringify(true));
+                localStorage.setItem(USERNAME_LOCAL_STORAGE_KEY, JSON.stringify(userName));
+                setErrorMessage(false);
+                navigate("/home");
+            } else {
+                setErrorMessage(true);
+            }
+            setIsLoggedInProgress(false);
+        }, 1000);
+    }
 
     return (
         <Grid>
@@ -25,7 +63,7 @@ function Login() {
                     </Grid>
 
                     <Grid item width={{sm:"50%", lg: "35%"}}>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <Grid container direction="column" flexWrap="wrap" gap={2}>
                                 <Grid item>
                                     <TextField
@@ -36,6 +74,10 @@ function Login() {
                                         label="Name"
                                         placeholder="Your username"
                                         color="primary"
+                                        helperText={errorMessage && "Incorrect username"}
+                                        error={errorMessage}
+                                        value={userName}
+                                        onChange={handleUsernameChange}
                                     />
                                 </Grid>
 
@@ -44,7 +86,7 @@ function Login() {
                                         color="primary"
                                         password={password}
                                         handlePasswordChange={handlePasswordChange}
-                                        isLoginError={isLoginError}
+                                        errorMessage={errorMessage}
                                     />
                                 </Grid>
 
@@ -60,7 +102,7 @@ function Login() {
                 </Grid>
             </Grid>
 
-            {isLoginError && (<ErrorSnackbar title={"Error Login"} message={"Incorrect Username or Password"}/>)}
+            {errorMessage && (<ErrorSnackbar title={"Error Login"} message={"Incorrect Username or Password"}/>)}
         </Grid>
     );
 }

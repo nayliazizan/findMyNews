@@ -1,9 +1,17 @@
-import { VisibilityOffIcon } from "@mui/icons-material/VisibilityOff";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 function PasswordField(props) {
+    const { password, handlePasswordChange, isLoginError, passwordVisible, ...otherProps} = props;
+    const [showPassword, setShowPassword] = useState(passwordVisible);
+    
+    function handleShowPassword(){
+        setShowPassword(!showPassword);
+    }
+
     return (
         <TextField 
             fullWidth
