@@ -17,6 +17,7 @@ function ErrorSnackbar({title, message, duration}){
         <Snackbar open={open} autoHideDuration={duration} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "center"}}>
             <Alert onClose={handleClose} severity="error" sx={{width: "100%"}}>
                 <AlertTitle>{title}</AlertTitle>
+                {message}
             </Alert>        
         </Snackbar>
     );

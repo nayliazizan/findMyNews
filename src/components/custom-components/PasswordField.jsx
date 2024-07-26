@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 
 function PasswordField(props) {
-    const { password, handlePasswordChange, isLoginError, passwordVisible, ...otherProps} = props;
+    const { password, handlePasswordChange, errorMessage, passwordVisible, ...otherProps} = props;
     const [showPassword, setShowPassword] = useState(passwordVisible);
     
     function handleShowPassword(){
@@ -20,8 +20,8 @@ function PasswordField(props) {
             placeholder="********"
             {...otherProps}
             type={showPassword ? "text" : "password"}
-            helperText={isLoginError && "Incorrect password"}
-            error={isLoginError}
+            helperText={errorMessage && "Incorrect password"}
+            error={errorMessage}
             value={password}
             onChange={handlePasswordChange}
             InputProps={{
@@ -40,7 +40,7 @@ function PasswordField(props) {
 PasswordField.propTypes = {
     password: PropTypes.string.isRequired,
     handlePasswordChange: PropTypes.func.isRequired,
-    isLoginError: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.bool.isRequired,
     passwordVisible: PropTypes.bool
 }
 

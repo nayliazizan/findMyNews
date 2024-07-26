@@ -85,7 +85,7 @@ function Header() {
                 >
 
                     <Grid item>
-                        <Chip icon={<FaceIcon/>} variant="filled" color="primary"/>
+                        <Chip icon={<FaceIcon/>} variant="filled" color="primary" label={username}/>
                     </Grid>
 
                     <Grid item marginRight={2}>

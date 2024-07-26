@@ -1,4 +1,3 @@
-import { Favorite } from "@mui/icons-material";
 import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import FavoriteIcon from "@mui/icons-material/Favorite";

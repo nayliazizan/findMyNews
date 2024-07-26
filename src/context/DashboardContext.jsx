@@ -18,15 +18,14 @@ export function DashboardContextProvider({children}) {
         setKeyword(searchTerm);
     }
 
-    function updateMyFavurites(title, url) {
+    function updateMyFavourites(title, url) {
         const newFavourite = searchResult.find(
             (newsItem) => newsItem.title === title && newsItem.url === url
         );
 
         const isCurrentFavourite = myFavourites.some(
-            (favourite) => {
+            (favourite) => 
                 favourite.title === newFavourite.title && favourite.url === newFavourite.url
-            }
         );
 
         if(isCurrentFavourite) {
@@ -63,7 +62,7 @@ export function DashboardContextProvider({children}) {
         setKeyword,
         handleSetKeyword,
         myFavourites,
-        updateMyFavurites,
+        updateMyFavourites,
         clearMyFavourites,
         searchResult,
         setSearchResult,

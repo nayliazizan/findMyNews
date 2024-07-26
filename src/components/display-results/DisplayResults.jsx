@@ -11,17 +11,17 @@ function DisplayResults({handleLoadMore, searchIsLoading}) {
         <Grid>
             {news.length === 0 && !searchIsLoading ? (
                 <Grid container height="100%">
-                    <Grid item cs={12}>
+                    <Grid item xs={12}>
                         {keyword === "" ? (
                             <Typography variant="h3">Please search for a topic.</Typography>
                         ) : (
-                            <Typography variant="h3">No news bsed on your keyword. Please try again.</Typography>
+                            <Typography variant="h3">No news based on your keyword. Please try again.</Typography>
                         )}
                     </Grid>
                 </Grid>
             ) : (
                 <Grid container spacing={2} direction={"column"} justifyContent={"space-between"} alignItems={"center"}>
-                    <Grid item alignSelf={"start"}>
+                    <Grid item alignSelf="start">
                         <Typography variant="h6">Search results for {title}: </Typography>
                     </Grid>
 
