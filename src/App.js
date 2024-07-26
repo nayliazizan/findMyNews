@@ -1,9 +1,7 @@
-//import logo from './logo.svg';
 import './App.css';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
-//import bckgd from './components/images/wbb1.jpg';
 import { DashboardContextProvider } from './context/DashboardContext';
 
 function App() {
