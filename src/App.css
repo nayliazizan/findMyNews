@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+.button-custom {
+  background-color: rgb(72, 152, 168) !important;
+}
+
+.button-custom:hover {
+  background-color: rgb(19, 65, 75) !important;
+}
+
+body {
+  background: url('./components/images/wbb1.jpg') no-repeat center center fixed;
+  height: 100%;
+  background-size: cover;
+}
+
+.favourite-card {
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.favourite-card:hover {
+  box-shadow: 0 0 11px rgb(72, 152, 168) !important;
+}
+
+.favourite-card a {
+  text-decoration: none;
+  color: black;
+}
+
+.favourite-card a:visited {
+  color: black;
+}

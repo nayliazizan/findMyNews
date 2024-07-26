@@ -37,7 +37,7 @@ function DisplayResults({handleLoadMore, searchIsLoading}) {
 
                     {news.length !== 0 && (
                         <Grid item marginBottom={1}>
-                            <Button variant="contained" onClick={handleLoadMore}>Load More</Button>
+                            <Button variant="contained" onClick={handleLoadMore} className="button-custom">Load More</Button>
                         </Grid>
                     )}
 

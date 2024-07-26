@@ -1,4 +1,4 @@
-import { Grid, Typography, Button } from "@mui/material";
+import { Grid, Typography, Button, CardContent, Card } from "@mui/material";
 import { useDashboardContext } from "../../context/DashboardContext";
 
 function MyFavouritesPanel() {
@@ -18,7 +18,7 @@ function MyFavouritesPanel() {
                     </Grid>
 
                     <Grid item>
-                        <Button variant="contained" size="small" onClick={clearMyFavourites}>Clear</Button>
+                        <Button variant="contained" size="small" onClick={clearMyFavourites} className="button-custom">Clear</Button>
                     </Grid>
                 </Grid>
             </Grid>
@@ -26,17 +26,19 @@ function MyFavouritesPanel() {
             <Grid item>
                 <Grid container direction="column" p={1}>
                     {myFavourites.map((favourite, index) => (
-                        <Grid 
+                        <Card 
                             item 
                             key={`${index}-${favourite.url}`} 
                             xs={12} 
-                            className={"favourite-item favourite-item-dark"} // OR favourite-item favourite-item-light
+                            className={"favourite-card"} // OR favourite-item favourite-item-light
                             p={1}
                         >
-                            <a href={favourite.url} target="_blank" rel="noreferrer">
-                                <Typography variant="subtitle1">{favourite.title}</Typography>
-                            </a>
-                        </Grid>
+                            <CardContent>
+                                <a href={favourite.url} target="_blank" rel="noreferrer">
+                                    <Typography variant="subtitle1">{favourite.title}</Typography>
+                                </a>
+                            </CardContent>
+                        </Card>
                     ))}
                 </Grid>
             </Grid>

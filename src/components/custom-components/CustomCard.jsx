@@ -1,7 +1,7 @@
 import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import {red, green} from "@mui/material/colors"
+import {red, blueGrey} from "@mui/material/colors"
 import { useDashboardContext } from "../../context/DashboardContext";
 
 function CustomCard ({author, date, url, urlToImage, content}) {
@@ -19,7 +19,7 @@ function CustomCard ({author, date, url, urlToImage, content}) {
     return (
         <Card sx={{maxWidth: 345, height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between"}} variant="outlined">
             <CardHeader 
-                avatar={<Avatar sx={{bgcolor: green[500]}} aria-label="recipe">
+                avatar={<Avatar className="button-custom" aria-label="recipe">
                     {avatarName}
                 </Avatar>}
                 title={author}
@@ -43,7 +43,7 @@ function CustomCard ({author, date, url, urlToImage, content}) {
                         "&:hover": {color:red[400]},
                         color: myFavourites.some(
                             (favourite) => favourite.url === url && favourite.title === content
-                        ) ? red[400] : "primary"
+                        ) ? red[400] : blueGrey[300]
                     }}
                     color="secondary"
                 >

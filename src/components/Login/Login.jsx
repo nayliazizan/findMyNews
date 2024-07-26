@@ -91,7 +91,7 @@ function Login() {
                                 </Grid>
 
                                 <Grid item>
-                                    <Button fullWidth variant="contained" type="submit" disabled={isLoggedInProgress}>
+                                    <Button fullWidth variant="contained" type="submit" disabled={isLoggedInProgress} className="button-custom">
                                         {isLoggedInProgress ? "Signing In" : "Sign In"}
                                     </Button>
                                     {isLoggedInProgress && <LinearProgress color="primary"/>}

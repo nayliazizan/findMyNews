@@ -47,7 +47,7 @@ function Header() {
                     sx={{userSelect: "none"}} 
                     noWrap 
                     color="text.secondary"
-                >Find My News</Typography>
+                >FIND MY NEWS</Typography>
             </Grid>
             
             <Grid item className="search" xs={10} sm={5} md={6}>
@@ -70,6 +70,7 @@ function Header() {
                         <Button
                             variant="contained"
                             onClick={() => handleSetKeyword(searchTerm)}
+                            className="button-custom"
                         >Search</Button>
                     </Grid>
                 </Grid>
@@ -85,11 +86,11 @@ function Header() {
                 >
 
                     <Grid item>
-                        <Chip icon={<FaceIcon/>} variant="filled" color="primary" label={username}/>
+                        <Chip icon={<FaceIcon/>} variant="filled" color="primary" label={username} className="button-custom"/>
                     </Grid>
 
                     <Grid item marginRight={2}>
-                        <Button variant="contained" onClick={handleLogout}>
+                        <Button variant="contained" onClick={handleLogout} className="button-custom">
                             Logout
                         </Button>
                     </Grid>
