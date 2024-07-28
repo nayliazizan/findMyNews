@@ -8,6 +8,7 @@ function PasswordField(props) {
     const { password, handlePasswordChange, errorMessage, passwordVisible, ...otherProps} = props;
     const [showPassword, setShowPassword] = useState(passwordVisible);
     
+    //control password visibility
     function handleShowPassword(){
         setShowPassword(!showPassword);
     }
@@ -19,7 +20,7 @@ function PasswordField(props) {
             label="Password"
             placeholder="********"
             {...otherProps}
-            type={showPassword ? "text" : "password"}
+            type={showPassword ? "text" : "password"} //change input based on visibility state
             helperText={errorMessage && "Incorrect password"}
             error={errorMessage}
             value={password}
@@ -45,7 +46,7 @@ PasswordField.propTypes = {
 }
 
 PasswordField.defaultProps = {
-    passwordVisible: false
+    passwordVisible: false //make default password visibility
 }
 
 export default PasswordField;

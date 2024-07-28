@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"; //import to validate component props
 import { createContext, useContext, useEffect, useState } from "react";
 import { LOGIN_LOCAL_STORAGE_KEY, FAVOURITES_LOCAL_STORAGE_KEY } from "../const/consts";
 
@@ -9,11 +9,12 @@ export function DashboardContextProvider({children}) {
     const localStorageMyFavourite = JSON.parse(localStorage.getItem(FAVOURITES_LOCAL_STORAGE_KEY)) || [];
 
     const [isLoggedIn, setIsLoggedIn] = useState(localStorageIsUserLoggedIn);
-    const [keyword, setKeyword] = useState("");
+    const [keyword, setKeyword] = useState(""); //state for search keyword
     const [searchResult, setSearchResult] = useState([]);
-    const [myFavourites, setMyFavourites] = useState(localStorageMyFavourite);
-    const [news, setNews] = useState([]);
+    const [myFavourites, setMyFavourites] = useState(localStorageMyFavourite); //state for fav news
+    const [news, setNews] = useState([]); //state for search results
 
+    //update keyword for search
     function handleSetKeyword(searchTerm){
         setKeyword(searchTerm);
     }
@@ -75,8 +76,9 @@ export function DashboardContextProvider({children}) {
 
 export function useDashboardContext() {
     return useContext(DashboardContext);
-}
+} // use hook to use dashboard context
 
+//define prop types to validate the props being passed to the component
 DashboardContextProvider.propTypes = {
     children: PropTypes.func
-}.isRequired;
+}.isRequired; //define type for children prop

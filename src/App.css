@@ -37,6 +37,7 @@
   }
 }
 
+/*make all buttons on my website has theme*/
 .button-custom {
   background-color: rgb(72, 152, 168) !important;
 }
@@ -45,12 +46,14 @@
   background-color: rgb(19, 65, 75) !important;
 }
 
+/* background for my website*/
 body {
   background: url('./components/images/wbb1.jpg') no-repeat center center fixed;
   height: 100%;
   background-size: cover;
 }
 
+/*make fav news in list has their own card and has its own opacity*/
 .favourite-card {
   margin-bottom: 20px;
   background-color: rgba(255, 255, 255, 0.7) !important;

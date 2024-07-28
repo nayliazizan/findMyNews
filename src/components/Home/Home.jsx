@@ -13,9 +13,10 @@ const DEVENV = process.env.REACT_APP_DEV;
 
 function Home() {
     const {keyword, searchResult, setSearchResult} = useDashboardContext();
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1); //state to keep track of current page
     const [searchIsLoading, setSearchIsLoading] = useState(false);
 
+    //fetch news data using news api
     const fetchInitialSearchResults = useCallback(async()=> {
         setCurrentPage(1);
         if (keyword === ""){
@@ -52,6 +53,7 @@ function Home() {
         fetchInitialSearchResults();
     }, [fetchInitialSearchResults]);
 
+    //load more news when user click the button
     function handleLoadMore(){
         setCurrentPage((prev) => prev + 1);
     }
@@ -92,24 +94,19 @@ function Home() {
     return (
         <Grid container className="main-container" direction={"column"}>
             <Grid className="header-container" item lg={1} style={{maxHeight: "10vh"}} borderBottom={2}>
-                <Header/>
+                <Header/> {/*display Header component */}
             </Grid>
 
             <Grid className="content-container" item lg={11}>
                 <Grid container diection="row" style={{height: "100%"}} height="90vh">
                     <Grid className="left-panel-container" item borderRight={{xs:0, sm:1, md:2}} lg={2.5} md={3} sm={4} xs={12}>
                         <MyFavouritesPanel 
-                            //style={{overflowY: "scroll"}}
-                            /*
-                            handleSetKeyword={handleSetKeyword}
-                            myFavourites={myFavourites}
-                            clearmyFavourites={clearmyFavourites}
-                            */
                         ></MyFavouritesPanel>
                     </Grid>
 
                     <Grid className="right-panel-container" item height="90vh" lg={9.5} md={9} sm={8} xs={12} p={2}>
-                        <DisplayResults /* keyword={keyword} */ handleLoadMore={handleLoadMore} searchIsLoading={searchIsLoading}/>
+                        {/*display search result*/}
+                        <DisplayResults handleLoadMore={handleLoadMore} searchIsLoading={searchIsLoading}/>
                     </Grid>
                 </Grid>
             </Grid>

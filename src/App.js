@@ -9,7 +9,9 @@ function App() {
     <BrowserRouter>
       <DashboardContextProvider>
         <Routes>
+          {/*navigate to login if user not login */}
           <Route path='/' element={<Login/>} />
+          {/* navigate to home if user login already */}
           <Route path='/home' element={<Home/>} />
         </Routes>
       </DashboardContextProvider>

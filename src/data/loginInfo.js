@@ -1,3 +1,5 @@
+//dummy login info
+
 const loginInfo = [
     {username: "john", password: "12345"},
     {username: "taylor", password: "13131"},

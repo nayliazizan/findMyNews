@@ -6,8 +6,10 @@ import { useDashboardContext } from "../../context/DashboardContext";
 
 function CustomCard ({author, date, url, urlToImage, content}) {
     const {myFavourites, updateMyFavourites} = useDashboardContext();
+    //get first letter of person name for avatar
     const avatarName = author.charAt(0).toUpperCase();
 
+    //convert the date to readable format
     function getDate(date){
         const dateTime = new Date(date);
         const year = dateTime.getFullYear();
@@ -23,7 +25,7 @@ function CustomCard ({author, date, url, urlToImage, content}) {
                     {avatarName}
                 </Avatar>}
                 title={author}
-                subheader={getDate(date)}
+                subheader={getDate(date)} //display formatted date
             />
 
             <CardActionArea href={url} target="_blank" rel="noreferrer">
@@ -40,14 +42,14 @@ function CustomCard ({author, date, url, urlToImage, content}) {
                     aria-label="add to favourites" 
                     onClick={() => updateMyFavourites(content, url)} 
                     sx={{
-                        "&:hover": {color:red[400]},
+                        "&:hover": {color:red[400]}, //change color if there is hover
                         color: myFavourites.some(
                             (favourite) => favourite.url === url && favourite.title === content
                         ) ? red[400] : blueGrey[300]
                     }}
                     color="secondary"
                 >
-                    <FavoriteIcon/>
+                    <FavoriteIcon/> {/*fav icon button */}
                 </IconButton>
             </CardActions>
         </Card>

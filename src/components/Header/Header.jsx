@@ -13,18 +13,21 @@ function Header() {
     const [username, setUsername] = useState(localStorageUsername);
     const navigate = useNavigate();
 
+    //direct user to login page if they not loggin yet
     useEffect(() => {
         if (!isLoggedIn){
             navigate("/");
         }
     }, [isLoggedIn, navigate]);
 
+    //handle enter key press for search
     function handleKeyPress(e) {
         if(e.key === "Enter"){
             handleSetKeyword(searchTerm);
         }
     }
 
+    //handle logout and clear session data
     function handleLogout() {
         setIsLoggedIn(false);
         setUsername("");
@@ -32,7 +35,8 @@ function Header() {
         setKeyword("");
         setNews("");
 
-        localStorage.removeItem(USERNAME_LOCAL_STORAGE_KEY);
+        //remove username from localstorage on logout
+        localStorage.removeItem(USERNAME_LOCAL_STORAGE_KEY); 
         localStorage.removeItem(LOGIN_LOCAL_STORAGE_KEY);
     }
 

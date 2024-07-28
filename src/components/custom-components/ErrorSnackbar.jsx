@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 function ErrorSnackbar({title, message, duration}){
     const [open, setOpen] = useState(true);
 
+    //user can close the snackbar
     function handleClose(_event, reason){
         if (reason === "clickaway") {
             return;
@@ -30,7 +31,7 @@ ErrorSnackbar.propTypes = {
 }
 
 ErrorSnackbar.defaultProps = {
-    duration: 3000
+    duration: 3000 //default duration for snackbar if user didnt close
 }
 
 export default ErrorSnackbar;

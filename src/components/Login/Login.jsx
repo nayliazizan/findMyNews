@@ -1,6 +1,6 @@
 import { Grid, TextField, Button, LinearProgress, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import loginInfo from "../../data/loginInfo";
+import loginInfo from "../../data/loginInfo"; //import dummy login data
 import { useNavigate } from "react-router-dom";
 import PasswordField from "../custom-components/PasswordField";
 import ErrorSnackbar from "../custom-components/ErrorSnackbar";
@@ -24,19 +24,20 @@ function Login() {
 
     function handleUsernameChange(e){
         setErrorMessage(false);
-        setUserName(e.target.value);
+        setUserName(e.target.value); //update username state on change
     }
 
     function handlePasswordChange(e){
         setErrorMessage(false);
-        setPassword(e.target.value);
+        setPassword(e.target.value); //update password state on change
     }
 
     function handleSubmit(e){
-        e.preventDefault();
+        e.preventDefault(); //prevent deafult form submission behaviour
         setIsLoggedInProgress(true);
 
         setTimeout(() => {
+            //check if the entered login info match any data in dummy data
             const user = loginInfo.find(
                 (user) => user.username === userName && user.password === password
             );
@@ -48,12 +49,14 @@ function Login() {
                 setErrorMessage(false);
                 navigate("/home");
             } else {
+                //alert if login info are invalid
                 setErrorMessage(true);
             }
             setIsLoggedInProgress(false);
         }, 1000);
     }
 
+    //rendering the login form
     return (
         <Grid>
             <Grid container justifyContent="center" alignItems="center" sx={{minHeight: "100vh", width: "100%"}}>
