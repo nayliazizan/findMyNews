@@ -1,0 +1,7 @@
+for starter, i just wanna say that i pass props using "context" way
+instead of follow what stated in technical document as i found
+"context" way are more neat and readable.
+
+dummy data to log into my system...
+username: taylor
+password: 13131

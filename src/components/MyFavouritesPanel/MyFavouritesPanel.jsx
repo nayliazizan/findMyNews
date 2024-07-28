@@ -1,5 +1,6 @@
-import { Grid, Typography, Button, CardContent, Card } from "@mui/material";
+import { Grid, Typography, CardContent, Card } from "@mui/material";
 import { useDashboardContext } from "../../context/DashboardContext";
+import OrangeButton from "../custom-components/OrangeButton";
 
 function MyFavouritesPanel() {
     const {myFavourites, clearMyFavourites} = useDashboardContext(); //get those from context
@@ -20,7 +21,7 @@ function MyFavouritesPanel() {
 
                     <Grid item>
                         {/*this will clear ALL fav news */}
-                        <Button variant="contained" size="small" onClick={clearMyFavourites} className="button-custom">Clear</Button>
+                        <OrangeButton variant="contained" size="small" onClick={clearMyFavourites} className="button-custom">Clear</OrangeButton>
                     </Grid>
                 </Grid>
             </Grid>

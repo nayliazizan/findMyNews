@@ -1,9 +1,11 @@
-import { TextField, Typography, Grid, Button, Chip } from "@mui/material";
+import { TextField, Typography, Grid, Chip } from "@mui/material";
 import FaceIcon from "@mui/icons-material/Face";
 import { LOGIN_LOCAL_STORAGE_KEY, USERNAME_LOCAL_STORAGE_KEY } from "../../const/consts";
 import { useDashboardContext } from "../../context/DashboardContext";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import OrangeButton from "../custom-components/OrangeButton";
+import { orange, grey } from "@mui/material/colors";
 
 function Header() {
     const localStorageUsername = JSON.parse(localStorage.getItem(USERNAME_LOCAL_STORAGE_KEY));
@@ -35,7 +37,7 @@ function Header() {
         setKeyword("");
         setNews("");
 
-        //remove username from localstorage on logout
+        //remove username n login state from localstorage on logout
         localStorage.removeItem(USERNAME_LOCAL_STORAGE_KEY); 
         localStorage.removeItem(LOGIN_LOCAL_STORAGE_KEY);
     }
@@ -70,12 +72,12 @@ function Header() {
                         ></TextField>
                     </Grid>
 
-                    <Grid item xs={4} md={2}>
-                        <Button
+                    <Grid item xs={4} md={2} sx={{width: '100%', whiteSpace: 'nowrap'}}>
+                        <OrangeButton
                             variant="contained"
                             onClick={() => handleSetKeyword(searchTerm)}
                             className="button-custom"
-                        >Search</Button>
+                        >Search For News</OrangeButton>
                     </Grid>
                 </Grid>
             </Grid>
@@ -90,13 +92,13 @@ function Header() {
                 >
 
                     <Grid item>
-                        <Chip icon={<FaceIcon/>} variant="filled" color="primary" label={username} className="button-custom"/>
+                        <Chip icon={<FaceIcon/>} variant="filled" sx={{color: grey[100], backgroundColor: orange[500]}} label={username} className="button-custom"/>
                     </Grid>
 
                     <Grid item marginRight={2}>
-                        <Button variant="contained" onClick={handleLogout} className="button-custom">
+                        <OrangeButton variant="contained" onClick={handleLogout} className="button-custom">
                             Logout
-                        </Button>
+                        </OrangeButton>
                     </Grid>
                 </Grid>
             </Grid>

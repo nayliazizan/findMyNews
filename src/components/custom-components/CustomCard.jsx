@@ -4,6 +4,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import {red, blueGrey} from "@mui/material/colors"
 import { useDashboardContext } from "../../context/DashboardContext";
 
+//this component's goal is to display each news item
+
 function CustomCard ({author, date, url, urlToImage, content}) {
     const {myFavourites, updateMyFavourites} = useDashboardContext();
     //get first letter of person name for avatar
@@ -38,6 +40,8 @@ function CustomCard ({author, date, url, urlToImage, content}) {
             </CardActionArea>
 
             <CardActions disableSpacing>
+                {/*click this will trigger updateMyFavourites function 
+                    which add/remove news from fav list */}
                 <IconButton 
                     aria-label="add to favourites" 
                     onClick={() => updateMyFavourites(content, url)} 
@@ -45,7 +49,8 @@ function CustomCard ({author, date, url, urlToImage, content}) {
                         "&:hover": {color:red[400]}, //change color if there is hover
                         color: myFavourites.some(
                             (favourite) => favourite.url === url && favourite.title === content
-                        ) ? red[400] : blueGrey[300]
+                        ) ? red[400] : blueGrey[300] 
+                        //red means it already in fav list, grey mean hasnt add yet
                     }}
                     color="secondary"
                 >

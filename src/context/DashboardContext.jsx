@@ -19,6 +19,8 @@ export function DashboardContextProvider({children}) {
         setKeyword(searchTerm);
     }
 
+    //will used in CustomCard component to add/remove the news in fav list
+    //myFavourites array is updated based on the URL and title of the news article
     function updateMyFavourites(title, url) {
         const newFavourite = searchResult.find(
             (newsItem) => newsItem.title === title && newsItem.url === url

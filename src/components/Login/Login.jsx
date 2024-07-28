@@ -1,4 +1,4 @@
-import { Grid, TextField, Button, LinearProgress, Typography } from "@mui/material";
+import { Grid, TextField, LinearProgress, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import loginInfo from "../../data/loginInfo"; //import dummy login data
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,11 @@ import PasswordField from "../custom-components/PasswordField";
 import ErrorSnackbar from "../custom-components/ErrorSnackbar";
 import { useDashboardContext } from "../../context/DashboardContext";
 import { LOGIN_LOCAL_STORAGE_KEY, USERNAME_LOCAL_STORAGE_KEY } from "../../const/consts";
+import OrangeButton from "../custom-components/OrangeButton";
 
+//this component handles user login.
+//it will takes the given username n password and then checks against 
+//loginInfo array. this will later sets login state (isLoggedIn)
 
 function Login() {
     const [userName, setUserName] = useState("");
@@ -94,9 +98,9 @@ function Login() {
                                 </Grid>
 
                                 <Grid item>
-                                    <Button fullWidth variant="contained" type="submit" disabled={isLoggedInProgress} className="button-custom">
+                                    <OrangeButton fullWidth variant="contained" type="submit" disabled={isLoggedInProgress} className="button-custom">
                                         {isLoggedInProgress ? "Signing In" : "Sign In"}
-                                    </Button>
+                                    </OrangeButton>
                                     {isLoggedInProgress && <LinearProgress color="primary"/>}
                                 </Grid>
                             </Grid>

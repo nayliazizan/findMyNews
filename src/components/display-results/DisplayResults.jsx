@@ -14,10 +14,10 @@ function DisplayResults({handleLoadMore, searchIsLoading}) {
                     <Grid item xs={12}>
                         {keyword === "" ? (
                             //prompt user to search
-                            <Typography variant="h3">Please search for a topic.</Typography> 
+                            <Typography variant="h3" p={5} sx={{ fontStyle: 'oblique', fontWeight: 500 }}>Please search for a topic.</Typography> 
                         ) : (
                             //no news found
-                            <Typography variant="h3">No news based on your keyword. Please try again.</Typography> 
+                            <Typography variant="h3" p={5} sx={{ fontStyle: 'oblique', fontWeight: 500 }}>No news based on your keyword. Please try again.</Typography> 
                         )}
                     </Grid>
                 </Grid>
